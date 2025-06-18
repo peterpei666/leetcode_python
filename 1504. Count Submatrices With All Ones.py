@@ -1,21 +1,12 @@
 class Solution:
-    def numSubmat(self, mat: List[List[int]]) -> int:
-        m, n = len(mat), len(mat[0])
-        dp = [[0] * n for _ in range(m)]
-        for i in range(m):
-            dp[i][0] = mat[i][0]
-            for j in range(1, n):
-                if mat[i][j] == 1:
-                    dp[i][j] = dp[i][j - 1] + 1
-                else:
-                    dp[i][j] = 0
-        ans = 0
-        for j in range(n):
-            for i in range(m):
-                temp = dp[i][j]
-                for k in range(i, -1, -1):
-                    if dp[k][j] == 0:
-                        break
-                    temp = min(temp, dp[k][j])
-                    ans += temp
-        return ans
+    def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
+        n = len(nums)
+        nums.sort()
+        result = []
+        for i in range(0, n, 3):
+            if nums[i + 2] - nums[i] > k:
+                result.clear()
+                return result
+            else:
+                result.append([nums[i], nums[i + 1], nums[i + 2]])
+        return result
