@@ -2,8 +2,11 @@ from typing import List
 from collections import deque
 
 class Solution:
-    def isBipartite(self, graph: List[List[int]]) -> bool:
-        n = len(graph)
+    def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
+        graph = [[] for _ in range(n)]
+        for u, v in dislikes:
+            graph[u - 1].append(v - 1)
+            graph[v - 1].append(u - 1)
         color = [-1] * n
         for start in range(n):
             if color[start] == -1:
